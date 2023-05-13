@@ -29,20 +29,6 @@ export default function Home() {
 
   const [profileInfo, setProfileInfo] = useState()
 
-  async function profileInfoFct() {
-    try {
-      const profileInfo = await client.query({
-        query: defaultProfile,
-      })
-      setProfileInfo(profileInfo);
-      console.log(profileInfo);
-      return profileInfo;
-    }
-    catch(err) {
-      console.log('Error signin in:', err);
-    }
-  }
-
   async function login() {
     try {
       /* first request the challenge from the API server */
@@ -101,6 +87,21 @@ export default function Home() {
     }
   }
 
+  async function profileInfoFct() {
+    try {
+      console.log(address);
+      const profileInfo = await client.query({
+        query: defaultProfile,
+        //variables: { address }
+      })
+      setProfileInfo(profileInfo);
+      console.log(profileInfo.data);
+    }
+    catch(err) {
+      console.log('Error signin in:', err);
+    }
+  }
+
   return (
     <div>
       { /* if the user has not yet connected their wallet, show a connect button */ }
@@ -118,7 +119,7 @@ export default function Home() {
       { /* once the user has authenticated, show them a success message */ }
       {
         address && token && (
-          <><h2>Successfully signed in!</h2><button onClick={profileInfoFct}>check</button></>
+          <><><h2>Successfully signed in!</h2></><button onClick={profileInfoFct}>fetch data</button></>
         )
         /*
         address && token && (

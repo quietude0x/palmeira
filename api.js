@@ -53,6 +53,10 @@ export const authenticate = gql`
     }
   }
 `
+
+//query DefaultProfile($address: EthereumAddress!) { <-- this is supposed to work 
+//defaultProfile(request: { address: $address }) {
+
 export const defaultProfile = gql`
 query DefaultProfile {
   defaultProfile(request: { ethereumAddress: "0x3A5bd1E37b099aE3386D13947b6a90d97675e5e3"}) {
